@@ -42,7 +42,7 @@ export function Sidebar() {
         minHeight={5}
         flexShrink={0}
       >
-        <Bold>Welcome to SIGNAL 2021, {name}!</Bold>
+        <Bold>Welcome to SIGNAL 2022, {name}!</Bold>
         <Text>Current Time: {format(currentTime, 'HH:mm')}</Text>
         {process.env.DEBUG_SIGNAL && (
           <Bold>

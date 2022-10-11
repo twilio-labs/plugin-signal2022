@@ -20,7 +20,6 @@ const fs = require('fs');
 const { sleep } = require('../../utils/sleep');
 const { chalky } = require('../../utils/chalky');
 const { getRandomInt } = require('../../utils/maths');
-const { setTokenInPluginConfig } = require('../../utils/token');
 
 const { TwilioClientCommand } = baseCommands;
 
@@ -30,7 +29,7 @@ const baseFlags = { ...TwilioClientCommand.flags };
 baseFlags.profile.description =
   "Shorthand identifier for your twilio-cli profile; run '$ twilio profiles:list' for more info.";
 
-class Signal2021Command extends TwilioClientCommand {
+class Signal2022Command extends TwilioClientCommand {
   static strict = false;
 
   static aliases = ['signal'];
@@ -167,20 +166,20 @@ class Signal2021Command extends TwilioClientCommand {
   }
 
   async checkFlags() {
-    if (Signal2021Command.flags.feedback) {
+    if (Signal2022Command.flags.feedback) {
       this.logger.info(
         'We would love to hear what you think about SIGNAL Developer Mode. Head over to https://twil.io/signal-dev-mode-feedback'
       );
       return;
     }
 
-    if (Signal2021Command.flags.tail) {
+    if (Signal2022Command.flags.tail) {
       this.logger.info(
         `Welcome! Using --tail doesn't actually do something but we are glad you are listening :)`
       );
     }
 
-    if (Signal2021Command.flags.diagnostics) {
+    if (Signal2022Command.flags.diagnostics) {
       this.output(this.diagnostics);
       return;
     }
@@ -192,13 +191,13 @@ class Signal2021Command extends TwilioClientCommand {
         this.logger.info(stripIndent`
           It appears as if you are using Git Bash or a similar to run SIGNAL Developer Mode.
           Unfortunately Git Bash won't give you the best experience. Check out Windows Terminal as an alternative. If you still want to use it run next:
-          winpty twilio.cmd signal2021
+          winpty twilio.cmd signal2022
         `);
         process.exit(1);
       }
 
       this.logger.info(
-        `We get it, you had to try it. We would have, too. However, you'll get the most out of SIGNAL Developer Mode by running it just using:\n$ twilio signal2021\nEnjoy SIGNAL!`
+        `We get it, you had to try it. We would have, too. However, you'll get the most out of SIGNAL Developer Mode by running it just using:\n$ twilio signal2022\nEnjoy SIGNAL!`
       );
       process.exit(0);
     }
@@ -248,7 +247,7 @@ class Signal2021Command extends TwilioClientCommand {
   }
 }
 
-module.exports = Signal2021Command;
+module.exports = Signal2022Command;
 
 // catch all the ways node might exit
 process.on('beforeExit', () => pinoFinalHandler(null, 'beforeExit'));

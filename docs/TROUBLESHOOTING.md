@@ -20,17 +20,11 @@
 We will try to release fixes for issues as we discover them. Try updating to the latest version if you encounter any issues:
 
 ```bash
-twilio plugins:uninstall @twilio-labs/plugin-signal2021
-twilio plugins:install @twilio-labs/plugin-signal2021@latest
+twilio plugins:uninstall @twilio-labs/plugin-signal2022
+twilio plugins:install @twilio-labs/plugin-signal2022@latest
 ```
 
 ## Common Issues
-
-### Can't login
-
-The SIGNAL Developer Mode prompts you for your SIGNAL 2021 credentials. *These are not your regular Twilio credentials.*
-
-To check if you are using the right credentials, try logging into [signal.twilio.com/login](https://signal.twilio.com/login).
 
 ### No download & setup option
 
@@ -54,7 +48,7 @@ If animations were not turned off automatically or you'd want to turn them off e
 
 ```bash
 export FORCE_ANIMATION=0
-twilio signal2021
+twilio signal2022
 ```
 
 For a guide for Windows checkout this article on [setting environment variables][set-environment].
@@ -65,7 +59,7 @@ By default we are coloring the output of SIGNAL Developer Mode. You can turn tha
 
 ```bash
 export FORCE_COLOR=0
-twilio signal2021
+twilio signal2022
 ```
 
 For a guide for Windows checkout this article on [setting environment variables][set-environment].
@@ -76,7 +70,7 @@ You can turn this off by [setting the following environment variable][set-enviro
 
 ```bash
 export SIGNAL_NO_UTM=True
-twilio signal2021
+twilio signal2022
 ```
 
 For a guide for Windows checkout this article on [setting environment variables][set-environment].
@@ -87,7 +81,7 @@ You can also set `SIGNAL_NO_DIAGNOSTICS=True` to not send **anonymous** diagnost
 
 ### I have an issue I can't find here
 
-If you can't find your issue here, make sure to also [check the issues on this project](https://github.com/twilio-labs/plugin-signal2021/issues) for any existing issues.
+If you can't find your issue here, make sure to also [check the issues on this project](https://github.com/twilio-labs/plugin-signal2022/issues) for any existing issues.
 
 For anything that can't be found there, consider [reporting an issue](#reporting-an-issue).
 
@@ -97,9 +91,9 @@ If you are encountering any issue that you can't find listed above, please reach
 
 ### Support channels
 
-For any paid-ticket holders, you can start by reaching out to our SIGNAL Concierge at the bottom corner of the [SIGNAL 2021 website](https://signal.twilio.com).
+For any paid-ticket holders, you can start by reaching out to our SIGNAL Concierge at the bottom corner of the [SIGNAL 2022 website](https://signal.twilio.com).
 
-Alternatively, anyone can [open a *public* GitHub issue on this project](https://github.com/twilio-labs/plugin-signal2021/issues/new). 
+Alternatively, anyone can [open a *public* GitHub issue on this project](https://github.com/twilio-labs/plugin-signal2022/issues/new). 
 
 > **Important.** Please don't try to reach out via email to any of the maintainers. The channels mentioned above are being monitored during SIGNAL and will result in the fastest help. Email requests might not get answers until after the show.
 
@@ -107,9 +101,9 @@ Alternatively, anyone can [open a *public* GitHub issue on this project](https:/
 
 There are two pieces of information that you can give us to better help you tracking down the issue.
 
-1. Please provide us with the diagnostics information that will be output when you run `twilio signal2021 --diagnostics -o=json`.
+1. Please provide us with the diagnostics information that will be output when you run `twilio signal2022 --diagnostics -o=json`.
 2. Additionally a screenshot of the issue, if possible, can be useful.
-3. During the debugging you might be asked to run `twilio signal2021 -l debug`, which will stop overriding your content to display any errors that might be output. It will also tell you before logging in, where you can find the full log file as you might be asked for that.
+3. During the debugging you might be asked to run `twilio signal2022 -l debug`, which will stop overriding your content to display any errors that might be output. It will also tell you before logging in, where you can find the full log file as you might be asked for that.
 
 
 [set-environment]: https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html

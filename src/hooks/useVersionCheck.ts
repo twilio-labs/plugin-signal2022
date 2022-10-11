@@ -9,7 +9,7 @@ const pkgJson = require('../../package.json');
 async function fetchLatestVersion(): Promise<string> {
   try {
     const resp = got(
-      'https://unpkg.com/@twilio-labs/plugin-signal2021/package.json'
+      'https://unpkg.com/@twilio-labs/plugin-signal2022/package.json'
     );
     const { version } = await resp.json();
     return version;

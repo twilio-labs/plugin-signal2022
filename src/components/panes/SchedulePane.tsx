@@ -19,7 +19,7 @@ export const SchedulePane = () => {
   } = useCalendar();
 
   return (
-    <Pane headline="SIGNAL 2021">
+    <Pane headline="SIGNAL 2022">
       <PaneContent breakpoint={SHOW_SCHEDULE_SECTION}>
         {loading && <LoadingIndicator text="Loading Schedule..." />}
         {error && <Text>{error.toString()}</Text>}

@@ -24,25 +24,26 @@ const RESOURCES = [
     key: 'signal',
     name: 'SIGNAL Website',
     url: 'https://www.twilio.com/signal',
-    description: 'View live and on-demand SIGNAL 2021 sessions.',
+    description: 'View live and on-demand SIGNAL 2022 sessions.',
   },
   {
     key: 'codeexchange',
     name: 'Twilio CodeExchange',
-    url: 'https://www.twilio.com/code-exchange?q=signal2021',
+    url: 'https://www.twilio.com/code-exchange?q=signal2022',
     description: 'Find code for various use cases you can build with Twilio.',
   },
   {
     key: 'codeexchange-for-good',
     name: 'Twilio CodeExchange for Good',
     url: 'https://www.twilio.com/code-exchange-for-good',
-    description: 'Curated open-source library of some of our most common and effective applications for social impact to help you build and get to production faster.'
+    description:
+      'Curated open-source library of some of our most common and effective applications for social impact to help you build and get to production faster.',
   },
   {
     key: 'signal-tv',
     name: 'SIGNAL TV',
     url: 'https://twitch.tv/twilio',
-    description: 'Watch live coverage of SIGNAL 2021.',
+    description: 'Watch live coverage of SIGNAL 2022.',
   },
   {
     key: 'twilio-docs',
@@ -53,14 +54,14 @@ const RESOURCES = [
   {
     key: 'dev-mode-introduction',
     name: 'SIGNAL Developer Mode',
-    url: 'https://www.twilio.com/blog/signal-developer-mode-2021',
+    url: 'https://www.twilio.com/blog/signal-developer-mode-2022',
     description: 'Read more on how to use SIGNAL Developer Mode',
   },
   {
     key: 'troubleshooting',
     name: 'SIGNAL Developer Mode Troubleshooting',
     url:
-      'https://github.com/twilio-labs/plugin-signal2021/blob/main/docs/TROUBLESHOOTING.md',
+      'https://github.com/twilio-labs/plugin-signal2022/blob/main/docs/TROUBLESHOOTING.md',
     description: 'Read our troubleshooting guide for SIGNAL Developer Mode',
   },
   {
@@ -72,22 +73,17 @@ const RESOURCES = [
   {
     key: 'source-code',
     name: 'Developer Mode Source Code',
-    url: 'https://github.com/twilio-labs/plugin-signal2021',
+    url: 'https://github.com/twilio-labs/plugin-signal2022',
     description:
       'View the source and general documentation of SIGNAL Developer Mode',
-  },
-  {
-    key: 'talon1',
-    name: 'Talon 1 - Send your code to space!',
-    url: 'https://talon1.twil.io',
-    description: 'At SIGNAL 2021 we are sending community code to the edge of space and execute it there. Don\'t miss out on this once-in-a-lifetime opportunity.'
   },
   {
     key: 'twilioquest-extensions',
     name: 'TwilioQuest Extensions',
     url: 'https://github.com/TwilioQuest/twilioquest-extension-template',
-    description: 'Create custom content for TwilioQuest by building your own extension!'
-  }
+    description:
+      'Create custom content for TwilioQuest by building your own extension!',
+  },
 ];
 
 type ResourceRowProps = {

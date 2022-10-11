@@ -2,9 +2,10 @@
 <h1 align="center">SIGNAL Developer Mode</h1>
 <p align="center"><a href="https://github.com/twilio-labs/about"><img src="https://img.shields.io/static/v1?label=&message=Twilio-Labs&color=F22F46&labelColor=0D122B&logo=twilio&style=for-the-badge" alt="Part of Twilio Labs Banner"></a></p>
 
-[SIGNAL Developer Mode](https://twil.io/signal-developer-mode) is an augmentation for your experience at Twilio's [SIGNAL 2021 Conference](https://signal.twilio.com).
+[SIGNAL Developer Mode](https://twil.io/signal-developer-mode) is an augmentation for your experience at Twilio's [SIGNAL 2022 Conference](https://signal.twilio.com).
 
 It's built on top of the [Twilio CLI](https://twil.io/cli) and provides functionality inside your terminal such as:
+
 * __access to your full SIGNAL schedule__: view the entire SIGNAL and [SIGNAL TV](https://twitch.tv/twilio) schedule and register for any sessions you are interested in
 * __a packed demo section__: explore code samples for a variety of Twilio use-cases and get started in minutes
 * and more
@@ -24,7 +25,7 @@ It's built on top of the [Twilio CLI](https://twil.io/cli) and provides function
 
 You'll need the [Twilio CLI](https://twil.io/cli) to run SIGNAL Developer Mode. Head over to the [Twilio CLI documentation](https://www.twilio.com/docs/twilio-cli/quickstart) to install it.
 
-Additionally, you'll need a ticket to SIGNAL 2021. Register for a free ticket on the [SIGNAL website](https://signal.twilio.com).
+Additionally, you'll need a ticket to SIGNAL 2022. Register for a free ticket on the [SIGNAL website](https://signal.twilio.com).
 
 ## Supported Terminals
 
@@ -39,16 +40,12 @@ SIGNAL Developer Mode will also adapt based on the size of your terminal, howeve
 # Installation
 
 ```sh-session
-$ twilio plugins:install @twilio-labs/plugin-signal2021
-$ twilio --help signal2021
+$ twilio plugins:install @twilio-labs/plugin-signal2022
+$ twilio --help signal2022
 USAGE
-  $ twilio signal2021
+  $ twilio signal2022
 ...
 ```
-
-You'll be prompted for your SIGNAL credentials that you also use to [log into the SIGNAL 2021 website](https://signal.twilio.com/login).
-
-> If you don't want to enter your email and password every time, you can also [store them as environment variables](https://www.twilio.com/blog/2017/01/how-to-set-environment-variables.html) and pass them via the `--email` flags to `twilio signal2021`..
 
 ## Usage
 
@@ -61,15 +58,15 @@ SIGNAL Developer Mode relies on your keyboard for navigation. Check out the [ann
 * <kbd>Ctrl</kbd>+<kbd>D</kbd> exits the Installer
 * <kbd>W</kbd>, <kbd>K</kbd>, <kbd>S</kbd>, <kbd>D</kbd>, <kbd>R</kbd> let you switch between different modes (see sidebar inside the Developer Mode for more)
 
-
 # Commands
-* [`twilio signal2021`](#twilio-signal2021)
 
-## `twilio signal2021`
+* [`twilio signal2022`](#twilio-signal2022)
+
+## `twilio signal2022`
 
 ```
 USAGE
-  $ twilio signal2021
+  $ twilio signal2022
 
 OPTIONS
   -d, --diagnostics                Using this flag will output diagnostics information that will be useful when
