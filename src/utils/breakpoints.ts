@@ -32,10 +32,6 @@ export const SHOW_INSTALLER: Breakpoint = {
   minWidth: 68,
 };
 
-export const SHOW_CHAT: Breakpoint = {
-  minWidth: 79,
-};
-
 export const SHOW_SHORT_WELCOME_DESCRIPTION: Breakpoint = {
   minArea: 65 * 20,
 };
@@ -57,7 +53,6 @@ export const breakpoints = {
   SHOW_REGULAR_HEADLINE,
   SHOW_INSTALLER,
   SHOW_DEMO_SECTION,
-  SHOW_CHAT,
 };
 
 export default breakpoints;

@@ -9,8 +9,6 @@ export const ModeEvents = {
   showInstaller: 'SHOW_INSTALLER',
   showTest: 'SHOW_TEST',
   showDemos: 'SHOW_DEMOS',
-  showChat: 'SHOW_CHAT',
-  exitChat: 'EXIT_CHAT',
   exitInstaller: 'EXIT_INSTALLER',
   exit: 'EXIT',
   toggleInput: 'TOGGLE_INPUT',
@@ -30,9 +28,6 @@ const modeTransitions = {
   },
   [ModeEvents.showTest]: '#mode.mainPane.test',
   [ModeEvents.showDemos]: '#mode.mainPane.demos',
-  [ModeEvents.showChat]: {
-    target: ['#mode.mainPane.chat', '#mode.captureInput.off'],
-  },
   [ModeEvents.exit]: '#mode.mainPane.exit',
   [ModeEvents.enableInput]: '#mode.captureInput.on',
 };
@@ -61,7 +56,6 @@ export interface ModeMachineSchema {
         resources: {};
         exit: {};
         schedule: {};
-        chat: {};
         demos: {};
         installer: {};
         test: {};
@@ -127,13 +121,6 @@ export const modeMachine = Machine<
         },
         schedule: {},
         demos: {},
-        chat: {
-          on: {
-            [ModeEvents.exitChat]: {
-              target: ['#mode.mainPane.welcome', '#mode.captureInput.on'],
-            },
-          },
-        },
         installer: {
           entry: [
             assign({

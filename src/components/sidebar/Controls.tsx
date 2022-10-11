@@ -8,7 +8,6 @@ export function Controls() {
     { key: 'b', description: 'Toggle Sidebar' },
     { key: 'w', description: 'Welcome' },
     { key: 's', description: 'Schedule' },
-    { key: 'c', description: 'Chat' },
     { key: 'd', description: 'Demos' },
     { key: 'r', description: 'Useful Resources ' },
     { key: 'q', description: 'Exit' },

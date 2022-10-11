@@ -2,14 +2,12 @@ import { useQuery } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { useTerminalInfo } from '../hooks/useTerminalInfo';
 import { UserProfileQuery } from '../queries/user';
-import { Role } from '../types/chat';
 import { urlToBuffer } from '../utils/urlToBuffer';
 
 export type UserResponse = {
   currentAttendee: {
     id: string;
     avatarUrl?: string;
-    attendeeType: Role;
     email: string;
     firstName: string;
     lastName: string;
@@ -20,7 +18,6 @@ export type User = {
   id: string;
   email: string;
   name: string;
-  role: Role;
   accountSid?: string | null;
   twilioUsername?: string | null;
   twilioPassword?: string | null;
@@ -32,7 +29,6 @@ const defaultUser: User = {
   id: '',
   name: 'Operator',
   email: 'operator@twilio.com',
-  role: 'Explorer',
 };
 
 const UserContext = React.createContext<User>(defaultUser);
@@ -70,7 +66,6 @@ export const UserProvider: React.FC<UserProviderProps> = ({
           name: `${data.currentAttendee.firstName} ${
             data.currentAttendee.lastName?.[0] ?? ''
           }`.trim(),
-          role: data.currentAttendee.attendeeType,
         }));
       }
     })();
