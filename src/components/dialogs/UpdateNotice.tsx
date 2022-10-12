@@ -12,10 +12,10 @@ export function UpdateNotice() {
         Please exit, run{' '}
         <Code>
           {
-            'twilio plugins:remove @twilio-labs/plugin-signal2021 && twilio plugins:install @twilio-labs/plugin-signal2021@latest'
+            'twilio plugins:remove @twilio-labs/plugin-signal2022 && twilio plugins:install @twilio-labs/plugin-signal2022@latest'
           }
         </Code>{' '}
-        and restart Developer Mode with <Code>twilio signal2021</Code>.
+        and restart Developer Mode with <Code>twilio signal2022</Code>.
       </Text>
     </Box>
   );

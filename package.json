@@ -1,9 +1,9 @@
 {
-  "name": "@twilio-labs/plugin-signal2021",
-  "description": "Developer Mode for SIGNAL 2021",
-  "version": "1.0.3",
+  "name": "@twilio-labs/plugin-signal2022",
+  "description": "Developer Mode for SIGNAL 2022",
+  "version": "1.0.0",
   "author": "Twilio @twilio-labs",
-  "bugs": "https://github.com/twilio-labs/plugin-signal2021/issues",
+  "bugs": "https://github.com/twilio-labs/plugin-signal2022/issues",
   "publishConfig": {
     "access": "public"
   },
@@ -96,21 +96,21 @@
   ],
   "license": "MIT",
   "oclif": {
-    "name": "signal2021",
+    "name": "signal2022",
     "commands": "./dist/commands",
     "bin": "twilio",
     "devPlugins": [
       "@oclif/plugin-help"
     ],
     "topics": {
-      "signal2021": {
+      "signal2022": {
         "description": "Enable SIGNAL Developer Mode"
       }
     }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/twilio-labs/plugin-signal2021.git"
+    "url": "https://github.com/twilio-labs/plugin-signal2022.git"
   },
   "scripts": {
     "build": "tsc",

@@ -60,7 +60,7 @@ function FullDescription() {
       <Newline count={2} />
       <Text>
         If you want to peek under the hood, have issues or want to contribute,
-        head over to https://github.com/twilio-labs/plugin-signal2021
+        head over to https://github.com/twilio-labs/plugin-signal2022
       </Text>
     </ScrollText>
   );
@@ -101,7 +101,7 @@ function MediumDescription() {
       <Newline count={2} />
       <Text>
         If you want to peek under the hood, have issues or want to contribute,
-        head over to https://github.com/twilio-labs/plugin-signal2021
+        head over to https://github.com/twilio-labs/plugin-signal2022
       </Text>
     </ScrollText>
   );

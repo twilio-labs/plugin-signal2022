@@ -44,8 +44,8 @@ export function getDiagnostics() {
 
 export function getUserAgent() {
   if (!_diagnostics || Boolean(process.env.SIGNAL_NO_DIAGNOSTICS)) {
-    return `plugin-signal2021`;
+    return `plugin-signal2022`;
   }
 
-  return `plugin-signal2021/${_diagnostics.pluginVersion} ${_diagnostics.twilioCliVersion}`;
+  return `plugin-signal2022/${_diagnostics.pluginVersion} ${_diagnostics.twilioCliVersion}`;
 }

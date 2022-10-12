@@ -5,8 +5,8 @@
 To set up the project for the first time, clone the repo and install dependencies:
 
 ```bash
-git@github.com:twilio-labs/plugin-signal2021.git
-cd plugin-signal2021
+git@github.com:twilio-labs/plugin-signal2022.git
+cd plugin-signal2022
 npm install
 ```
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useMode } from '../../context/mode';
-import { ChatPane } from './ChatPane';
 import { DemoPane } from './DemoPane';
 import { InstallerPane } from './InstallerPane';
 import { ResourcePane } from './ResourcePane';
@@ -21,8 +20,6 @@ export function MainPane() {
       return <SchedulePane />;
     case state.matches('mainPane.installer'):
       return <InstallerPane />;
-    case state.matches('mainPane.chat'):
-      return <ChatPane />;
     case state.matches('mainPane.welcome'):
     default:
       return <WelcomePane />;
