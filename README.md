@@ -25,11 +25,11 @@ It's built on top of the [Twilio CLI](https://twil.io/cli) and provides function
 
 You'll need the [Twilio CLI](https://twil.io/cli) to run SIGNAL Developer Mode. Head over to the [Twilio CLI documentation](https://www.twilio.com/docs/twilio-cli/quickstart) to install it.
 
-Additionally, you'll need a ticket to SIGNAL 2022. Register for a free ticket on the [SIGNAL website](https://signal.twilio.com).
+Additionally, to view the sessions shown in Developer Mode, you'll need a ticket to SIGNAL 2022. Register for a free ticket on [the SIGNAL website](https://signal.twilio.com).
 
 ## Supported Terminals
 
-SIGNAL Developer Mode should work in any terminal but some terminals might have limited functionality or [display flickering](https://github.com/vadimdemedes/ink/issues/359). 
+SIGNAL Developer Mode should work in any terminal, but some terminals might have limited functionality or [display flickering](https://github.com/vadimdemedes/ink/issues/359). 
 
 Some of the terminals that we found that were doing a good job are: [Hyper](https://hyper.is), the built-in macOS Terminal.app and [cmder](https://cmder.net/) on Windows.
 
