@@ -1,5 +1,6 @@
 import { RawSession, Session, SessionsData } from '../types/session';
 import { sortByDate } from './dateHelpers';
+import { getRandomInt } from './maths';
 
 function mapSession(rawSession: RawSession): Session {
   const hasEnded =
@@ -35,7 +36,8 @@ export function groupSessionsByTypeOrDate(
     const session = mapSession(baseSession);
     //! Hack to display at least one usable date while testing schedule
     if (!session.date) {
-      session.date = 'Nov 2';
+      const day = getRandomInt(2, 3);
+      session.date = `Nov ${day}`;
     }
 
     if (!groupedSets[session.date]) {
