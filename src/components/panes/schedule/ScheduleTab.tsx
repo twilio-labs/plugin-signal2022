@@ -8,6 +8,7 @@ export type ScheduleTabProps = {
   day: string;
   active: boolean;
 };
+
 export function ScheduleTab({ day, active }: ScheduleTabProps) {
   const TextComponent = active ? Inverse : Text;
 

@@ -2,7 +2,10 @@ import ms from 'ms';
 import { Session } from '../types/session';
 
 export function sortByDate(a: Session, b: Session): number {
-  const timeSorted = a.startDate.getTime() - b.startDate.getTime();
+  if (!a.start_time || !b.start_time) return 0;
+
+  const timeSorted =
+    new Date(a.start_time).getTime() - new Date(b.start_time).getTime();
 
   if (timeSorted === 0) {
     return a.name.localeCompare(b.name);

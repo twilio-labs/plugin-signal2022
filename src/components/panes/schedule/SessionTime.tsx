@@ -1,14 +1,14 @@
 import format from 'date-fns/format';
 import { Text } from 'ink';
 import React from 'react';
-import { AugmentedSession } from '../../../types/session';
+import { Session } from '../../../types/session';
 
 export type SessionTimeProps = {
-  session: AugmentedSession;
+  session: Session;
 };
 export function SessionTime({ session }: SessionTimeProps) {
-  const startTime = format(session.startDate, 'hh:mm');
-  const endTime = format(session.endDate, 'hh:mm');
+  const startTime = format(new Date(session.start_time), 'hh:mm');
+  const endTime = format(new Date(session.end_time), 'hh:mm');
 
   if (!session.hasEnded) {
     return (
@@ -19,7 +19,7 @@ export function SessionTime({ session }: SessionTimeProps) {
     );
   }
 
-  const label = session.isSignalTv ? ' off air ' : 'on demand';
+  const label = 'on demand';
 
   return (
     <>

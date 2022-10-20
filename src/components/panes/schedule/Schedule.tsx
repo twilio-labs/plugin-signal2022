@@ -1,8 +1,8 @@
 import { Box, useInput } from 'ink';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useScrollableList } from '../../../hooks/useScrollableList';
 import { Session } from '../../../types/session';
-import { openBrowserUrl, openSessionUrl } from '../../../utils/openLink';
+import { openBrowserUrl } from '../../../utils/openLink';
 import { groupSessionsByTypeOrDate } from '../../../utils/scheduleUtils';
 import { ScheduleContent } from './ScheduleContent';
 import { ScheduleTab } from './ScheduleTab';
@@ -10,16 +10,9 @@ import { SessionDetails } from './SessionDetails';
 
 export type ScheduleProps = {
   sessions: Session[];
-  calendarSessions: Session[];
-  unregister: (sessionId: string) => any;
-  register: (sessionId: string) => any;
 };
-export function Schedule({
-  sessions,
-  calendarSessions,
-  unregister,
-  register,
-}: ScheduleProps) {
+
+export function Schedule({ sessions }: ScheduleProps) {
   const groupedSessions = useMemo(() => {
     const grouped = groupSessionsByTypeOrDate(sessions);
     return grouped;
@@ -27,10 +20,6 @@ export function Schedule({
 
   const days = Object.keys(groupedSessions).sort();
 
-  const registeredSessions = useMemo(
-    () => new Set(calendarSessions.map((x) => x.id)),
-    [calendarSessions]
-  );
   const [selectedDay, setSelectedDay] = useState(0);
 
   const [selectedSession, setSelectedSession] = useScrollableList(
@@ -38,26 +27,7 @@ export function Schedule({
     groupedSessions[days[selectedDay]]
   );
 
-  const [updatingSesions, setUpdatingSessions] = useState<
-    {
-      id: string;
-      type: 'registering' | 'unregistering';
-    }[]
-  >([]);
-
-  useEffect(() => {
-    if (registeredSessions) {
-      setUpdatingSessions((current) => {
-        return current.filter(({ id, type }) =>
-          type === 'registering'
-            ? !registeredSessions.has(id)
-            : registeredSessions.has(id)
-        );
-      });
-    }
-  }, [registeredSessions]);
-
-  useInput((input, key) => {
+  useInput((_input, key) => {
     if (key.leftArrow) {
       setSelectedSession(0);
       setSelectedDay((currentDay) => Math.max(0, currentDay - 1));
@@ -72,30 +42,7 @@ export function Schedule({
 
     if (key.return) {
       const session = groupedSessions[days[selectedDay]][selectedSession];
-      if (session.url) {
-        openBrowserUrl(session.url);
-      } else {
-        openSessionUrl(session.id);
-      }
-    }
-
-    if (input === ' ') {
-      const session = groupedSessions[days[selectedDay]][selectedSession];
-      if (session.canRegister) {
-        if (registeredSessions.has(session.id)) {
-          setUpdatingSessions((current) => [
-            ...current,
-            { id: session.id, type: 'unregistering' },
-          ]),
-            unregister(session.id);
-        } else {
-          setUpdatingSessions((current) => [
-            ...current,
-            { id: session.id, type: 'registering' },
-          ]),
-            register(session.id);
-        }
-      }
+      openBrowserUrl(session.direct_link);
     }
   });
 
@@ -122,17 +69,10 @@ export function Schedule({
           <ScheduleContent
             sessions={groupedSessions[days[selectedDay]]}
             activeSessionIdx={selectedSession}
-            registeredSessions={registeredSessions}
           />
         </Box>
         <Box height={10}>
-          <SessionDetails
-            session={selectedSessionInstance}
-            registered={registeredSessions.has(selectedSessionInstance.id)}
-            updating={updatingSesions.find(
-              (x) => x.id === selectedSessionInstance.id
-            )}
-          />
+          <SessionDetails session={selectedSessionInstance} />
         </Box>
       </Box>
     </>

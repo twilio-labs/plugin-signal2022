@@ -1,11 +1,13 @@
 import { useMachine } from '@xstate/react';
 import got from 'got';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { Merge } from 'type-fest';
 import { assign, Machine } from 'xstate';
 import { DemosData } from '../types/inspector';
+import { SessionsData } from '../types/session';
 import config from '../utils/config';
 import { getUserAgent } from '../utils/diagnostics';
+import { normalizeSchedule } from '../utils/scheduleUtils';
 
 export interface FetchMachineSchema {
   states: {
@@ -141,4 +143,14 @@ export function useDemos() {
   const demosObject = apiResponse.data ? apiResponse.data.demos : undefined;
   const demos = convertObjectToArray(demosObject);
   return { ...apiResponse, demos };
+}
+
+export function useSessions() {
+  const apiResponse = useApi<SessionsData>('/sessions.json');
+
+  const sessionsList = useMemo(() => normalizeSchedule(apiResponse?.data), [
+    apiResponse.data,
+  ]);
+
+  return { ...apiResponse, sessionsList };
 }

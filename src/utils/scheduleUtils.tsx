@@ -1,49 +1,42 @@
-import format from 'date-fns/format';
-import { AugmentedSession, Session } from '../types/session';
+import { RawSession, Session, SessionsData } from '../types/session';
 import { sortByDate } from './dateHelpers';
 
-export const nonPaidTicketTypeId = '56556';
+function mapSession(rawSession: RawSession): Session {
+  const hasEnded =
+    rawSession.end_time == null // assume no end time means it's always available?
+      ? false
+      : Date.now() > new Date(rawSession.end_time).getTime();
 
-const levelIds = {
-  '56558': 'Beginner',
-  '56559': 'Intermediate',
-  '56560': 'Advanced',
-};
+  // TODO: support tbd speakers data?
+  // const speakers = rawSession.talent.map((name) => {
+  //   const parts = name.trim().split(' ', 2);
+  //   return {
+  //     firstName: parts[0],
+  //     lastName: parts[1],
+  //   };
+  // });
 
-export function getLevels(session: Session): string {
-  const levels = session.level.map((x) => levelIds[x]);
-  return levels.join(', ');
-}
-
-export function isPaid(session: Session): boolean {
-  return !(session.ticketType || []).includes(nonPaidTicketTypeId);
-}
-
-export function isSignalTv(session: Session): boolean {
-  return session.signalTv || session.name.startsWith('SIGNAL TV:');
-}
-
-function augmentSession(session: Session): AugmentedSession {
-  const signalTv = isSignalTv(session);
-  const sessionEnded = Date.now() > session.endDate.getTime();
   return {
-    ...session,
-    canRegister: !session.signalTv && !sessionEnded,
-    isSignalTv: signalTv,
-    hasEnded: sessionEnded,
+    ...rawSession,
+    hasEnded,
+    // speakers,
   };
 }
 
 type GroupedSessions = {
-  [key: string]: AugmentedSession[];
+  [key: string]: Session[];
 };
 
 export function groupSessionsByTypeOrDate(
   sessions: Session[]
 ): GroupedSessions {
-  const groupedSets: { [key: string]: Set<AugmentedSession> } = {};
+  const groupedSets: { [key: string]: Set<Session> } = {};
   for (const baseSession of sessions) {
-    const session = augmentSession(baseSession);
+    const session = mapSession(baseSession);
+    //! Hack to display at least one usable date while testing schedule
+    if (!session.date) {
+      session.date = 'Nov 2';
+    }
 
     if (!groupedSets[session.date]) {
       groupedSets[session.date] = new Set();
@@ -59,3 +52,45 @@ export function groupSessionsByTypeOrDate(
 
   return grouped;
 }
+
+export function normalizeSchedule(data?: SessionsData): Session[] {
+  if (typeof data == 'undefined') {
+    return undefined;
+  }
+
+  return data.map<Session>(mapSession);
+}
+
+// Save this since it'll be helpful later if it's anything like 2021 was
+// const apiDateTimeFormat = 'yyyy-MM-dd:HH:mm:ss xxxxx';
+
+// function normalizeSession(rawSession: RawSession): Session {
+//   if (rawSession.date && rawSession.startTime && rawSession.endTime) {
+//     // The swoogo/signalTV api both return dates in PDT/PST only.
+//     // Consider this when parsing, so that they'll format correctly across timezones
+//     const swoogoOffset = isDST() ? '-07:00' : '-08:00';
+//     const startDate = parse(
+//       `${rawSession.date}:${rawSession.startTime} ${swoogoOffset}`,
+//       apiDateTimeFormat,
+//       new Date()
+//     );
+//     const endDate = parse(
+//       `${rawSession.date}:${rawSession.endTime} ${swoogoOffset}`,
+//       apiDateTimeFormat,
+//       new Date()
+//     );
+
+//     return {
+//       ...rawSession,
+//       startDate,
+//       endDate,
+//     };
+//   }
+//   return null;
+// }
+
+// function normalizeSessions(rawSessions: RawSession[]): Session[] {
+//   return rawSessions
+//     .map((rawSession) => normalizeSession(rawSession))
+//     .filter((session) => session != null);
+// }

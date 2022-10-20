@@ -2,7 +2,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { Box, Text } from 'ink';
 import ms from 'ms';
 import React, { useEffect, useMemo, useState } from 'react';
-import { useCalendar } from '../../hooks/useCalendar';
+import { useSessions } from '../../hooks/useApi';
 import { useBreakpointForElement } from '../../hooks/useResize';
 import { Session } from '../../types/session';
 import { sortByDate } from '../../utils/dateHelpers';
@@ -13,7 +13,7 @@ import { LoadingIndicator } from '../common/LoadingIndicator';
 function retrieveNextSessions(sessions: Session[], count: number) {
   const currentTime = Date.now();
   const futureSessions = sessions.filter((session) => {
-    return session.endDate.getTime() > currentTime;
+    return new Date(session.end_time).getTime() > currentTime;
   });
   return futureSessions.slice(0, count);
 }
@@ -56,7 +56,7 @@ type ShortSessionEntryProps = {
   session: Session;
 };
 function ShortSessionEntry({ session }: ShortSessionEntryProps) {
-  const startTime = formatDistanceToNow(session.startDate, {
+  const startTime = formatDistanceToNow(new Date(session.start_time), {
     addSuffix: true,
   });
   return (
@@ -90,10 +90,10 @@ export function NextUp({ sessions }: NextUpProps) {
 }
 
 export const NextUpSection = () => {
-  const { loading, error, calendar } = useCalendar();
+  const { loading, error, sessionsList } = useSessions();
 
-  if (Array.isArray(calendar)) {
-    return <NextUp sessions={calendar} />;
+  if (Array.isArray(sessionsList)) {
+    return <NextUp sessions={sessionsList} />;
   } else if (typeof error !== 'undefined') {
     return <Text>{error.toString()}</Text>;
   } else if (typeof loading !== 'undefined') {
