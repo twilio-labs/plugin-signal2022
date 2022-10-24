@@ -1,27 +1,46 @@
+import { addHours } from 'date-fns';
 import { RawSession, Session, SessionsData } from '../types/session';
 import { sortByDate } from './dateHelpers';
-import { getRandomInt } from './maths';
 
 function mapSession(rawSession: RawSession): Session {
-  const hasEnded =
-    rawSession.end_time == null // assume no end time means it's always available?
-      ? false
-      : Date.now() > new Date(rawSession.end_time).getTime();
+  const startTime = stringsToDateTime(rawSession.date, rawSession.start_time);
+  const endTime = stringsToDateTime(rawSession.date, rawSession.end_time);
 
-  // TODO: support tbd speakers data?
-  // const speakers = rawSession.talent.map((name) => {
-  //   const parts = name.trim().split(' ', 2);
-  //   return {
-  //     firstName: parts[0],
-  //     lastName: parts[1],
-  //   };
-  // });
+  const hasEnded = getHasEnded(rawSession, startTime, endTime);
+
+  const speakers =
+    rawSession.speakers && typeof rawSession.speakers === 'string'
+      ? [rawSession.speakers]
+      : rawSession.speakers;
 
   return {
     ...rawSession,
     hasEnded,
-    // speakers,
+    startTime,
+    endTime,
+    speakers,
   };
+}
+
+/** Make these date + n_time strings actually useful, assume we're given UTC for once? */
+function stringsToDateTime(date?: string, time?: string) {
+  return date && time ? new Date(`${date}T${time}Z`) : undefined;
+}
+
+function getHasEnded(
+  session: RawSession,
+  startTime: Date = undefined,
+  endTime: Date = undefined
+) {
+  const now = new Date();
+
+  if (endTime) return now > endTime;
+
+  if (startTime) return new Date() > addHours(endTime, 1);
+
+  if (session.date) return now > new Date(session.date);
+
+  return true;
 }
 
 type GroupedSessions = {
@@ -32,12 +51,10 @@ export function groupSessionsByTypeOrDate(
   sessions: Session[]
 ): GroupedSessions {
   const groupedSets: { [key: string]: Set<Session> } = {};
-  for (const baseSession of sessions) {
-    const session = mapSession(baseSession);
+  for (const session of sessions) {
     //! Hack to display at least one usable date while testing schedule
     if (!session.date) {
-      const day = getRandomInt(2, 3);
-      session.date = `Nov ${day}`;
+      session.date = `All Days`;
     }
 
     if (!groupedSets[session.date]) {

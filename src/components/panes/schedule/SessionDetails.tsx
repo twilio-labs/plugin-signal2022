@@ -1,4 +1,4 @@
-// import { commaListsAnd } from 'common-tags';
+import { commaListsAnd } from 'common-tags';
 import { Box, Spacer, Text } from 'ink';
 import React from 'react';
 import { Session } from '../../../types/session';
@@ -14,7 +14,6 @@ export function SessionDetails({ session }: SessionDetailsProps) {
   }
 
   const showDescription = !!session.description;
-  const formattedDescription = session.description.replace(/<\/?[^>]+>/g, '');
 
   return (
     <Box
@@ -31,16 +30,15 @@ export function SessionDetails({ session }: SessionDetailsProps) {
         <Spacer />
       </Box>
       <Spacer />
-      {/* //TODO: Looks like we have speakers, but it's not in the JSON, yet... */}
-      {/* {Array.isArray(session.speakers) && session.speakers.length > 0 && (
-        <Text wrap="truncate-end">{commaListsAnd`Speakers: ${session.speakers.map(
-          (x) => x.firstName + ' ' + x.lastName
-        )}`}</Text>
+      {Array.isArray(session.speakers) && session.speakers.length > 0 && (
+        <Text wrap="truncate-end">{commaListsAnd`Speakers: ${session.speakers}`}</Text>
       )}
-      <Spacer /> */}
+      <Spacer />
       <Box>
         {showDescription && (
-          <Text wrap="truncate-end">{formattedDescription}</Text>
+          <Text wrap="truncate-end">
+            {session.description.replace(/<\/?[^>]+>/g, '')}
+          </Text>
         )}
       </Box>
     </Box>

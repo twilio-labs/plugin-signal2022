@@ -146,9 +146,9 @@ export function useDemos() {
 }
 
 export function useSessions() {
-  const apiResponse = useApi<SessionsData>('/sessions.json');
+  const apiResponse = useApi<SessionsData>('/sessions-full.json');
 
-  const sessionsList = useMemo(() => normalizeSchedule(apiResponse?.data), [
+  const sessionsList = useMemo(() => normalizeSchedule(apiResponse.data), [
     apiResponse.data,
   ]);
 

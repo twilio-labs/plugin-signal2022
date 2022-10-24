@@ -12,13 +12,19 @@ export function ScheduleContent({
   sessions,
   activeSessionIdx,
 }: ScheduleContent) {
-  const selectedId = (sessions[activeSessionIdx] || {}).id;
+  const { id, direct_link } = sessions[activeSessionIdx];
+  const selectedId = id + direct_link;
 
   return (
     <ScrollableItemList activeIdx={activeSessionIdx}>
-      {sessions.map((s) => (
-        <SessionEntry session={s} key={s.id} active={s.id === selectedId} />
-      ))}
+      {sessions.map((s) => {
+        // Sessions contain duplicate ids, don't rely just on id for a unique key
+        const key = s.id + s.direct_link;
+
+        return (
+          <SessionEntry session={s} key={key} active={key === selectedId} />
+        );
+      })}
     </ScrollableItemList>
   );
 }

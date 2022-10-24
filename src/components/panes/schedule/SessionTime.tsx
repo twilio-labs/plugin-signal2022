@@ -6,11 +6,12 @@ import { Session } from '../../../types/session';
 export type SessionTimeProps = {
   session: Session;
 };
-export function SessionTime({ session }: SessionTimeProps) {
-  const startTime = format(new Date(session.start_time), 'hh:mm');
-  const endTime = format(new Date(session.end_time), 'hh:mm');
 
-  if (!session.hasEnded) {
+export function SessionTime({ session }: SessionTimeProps) {
+  const startTime = maybeFormatTime(session.startTime);
+  const endTime = maybeFormatTime(session.endTime);
+
+  if (!session.hasEnded && startTime && endTime) {
     return (
       <>
         {startTime} <Text dimColor>- {endTime} </Text>
@@ -27,4 +28,8 @@ export function SessionTime({ session }: SessionTimeProps) {
       {' │ '}
     </>
   );
+}
+
+function maybeFormatTime(time?: Date) {
+  return time ? format(time, 'hh:mm') : undefined;
 }

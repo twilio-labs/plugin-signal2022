@@ -1,28 +1,40 @@
 export interface RawSession {
-  id: number;
+  id: number | string;
   name: string;
-  admin_short_name: string;
-  badge_name: string;
-  // Description string, probably has HTML in it
-  description: string;
-  date: string | null;
-  start_time: string | null;
-  end_time: string | null;
-  use_event_timezone: boolean;
-  timezone: string;
-  capacity: number | null;
-  notes: string[] | null;
-  location: string | null;
-  track: string | null;
-  session_included: boolean;
+  description?: string;
+  end_time?: string;
+  visibility: Visibility;
+  speakers: string[] | string;
   direct_link: string;
-  virtual_link: string | null;
-  created_at: string;
-  updated_at: string;
+  type?: Type;
+  date?: string;
+  start_time?: string;
+}
+
+export enum Type {
+  Analyst = 'Analyst',
+  Breakout = 'Breakout',
+  Generic = 'Generic',
+  IndustryQABooth = 'Industry Q&A  Booth',
+  Keynote = 'Keynote',
+  ProductQABooth = 'Product Q&A  Booth',
+  SignalTv = 'SIGNAL TV',
+  Spotlight = 'Spotlight',
+  SpotlightForWebsite = 'Spotlight (for website)',
+  Superclass = 'Superclass',
+  TheSummits = 'The Summits',
+  VenturesQABooth = 'Ventures Q&A  Booth',
+}
+
+export enum Visibility {
+  Everyone = 'Everyone',
 }
 
 export type SessionsData = RawSession[];
 
 export interface Session extends RawSession {
+  endTime?: Date;
   hasEnded: boolean;
+  speakers: string | string[];
+  startTime?: Date;
 }

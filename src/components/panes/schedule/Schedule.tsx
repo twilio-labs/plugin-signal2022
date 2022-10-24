@@ -48,6 +48,7 @@ export function Schedule({ sessions }: ScheduleProps) {
 
   const selectedSessionInstance =
     groupedSessions[days[selectedDay]][selectedSession];
+
   return (
     <>
       <Box flexDirection="column" flexGrow={1} justifyContent="flex-start">

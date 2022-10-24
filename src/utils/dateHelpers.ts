@@ -2,14 +2,14 @@ import ms from 'ms';
 import { Session } from '../types/session';
 
 export function sortByDate(a: Session, b: Session): number {
-  if (!a.start_time || !b.start_time) return 0;
+  if (!a.startTime || !b.startTime || !a.endTime || !b.endTime) return -1;
 
-  const timeSorted =
-    new Date(a.start_time).getTime() - new Date(b.start_time).getTime();
+  const timeSorted = a.startTime.getTime() - b.startTime.getTime();
 
   if (timeSorted === 0) {
     return a.name.localeCompare(b.name);
   }
+
   return timeSorted;
 }
 
