@@ -11,10 +11,10 @@ export function SessionTime({ session }: SessionTimeProps) {
   const startTime = maybeFormatTime(session.startTime);
   const endTime = maybeFormatTime(session.endTime);
 
-  if (!session.hasEnded && startTime && endTime) {
+  if (!session.hasEnded && startTime) {
     return (
       <>
-        {startTime} <Text dimColor>- {endTime} </Text>
+        {startTime} <Text dimColor>- {endTime ?? '-----'} </Text>
         {' │ '}
       </>
     );

@@ -11,9 +11,9 @@ import { Divider } from '../common/Divider';
 import { LoadingIndicator } from '../common/LoadingIndicator';
 
 function retrieveNextSessions(sessions: Session[], count: number) {
-  const currentTime = Date.now();
+  const currentTime = new Date();
   const futureSessions = sessions.filter((session) => {
-    return new Date(session.end_time).getTime() > currentTime;
+    return session.endTime > currentTime;
   });
   return futureSessions.slice(0, count);
 }
@@ -55,10 +55,12 @@ function useNextSessions(
 type ShortSessionEntryProps = {
   session: Session;
 };
+
 function ShortSessionEntry({ session }: ShortSessionEntryProps) {
   const startTime = formatDistanceToNow(new Date(session.start_time), {
     addSuffix: true,
   });
+
   return (
     <>
       <Text wrap="truncate-end">
@@ -72,16 +74,21 @@ function ShortSessionEntry({ session }: ShortSessionEntryProps) {
 export type NextUpProps = {
   sessions: Session[];
 };
+
 export function NextUp({ sessions }: NextUpProps) {
   const { ref, shouldRender } = useBreakpointForElement({ minHeight: 7 });
   const nextSessions = useNextSessions(sessions);
+
   return (
     <Box ref={ref} flexDirection="column" padding={1} height={7}>
       {shouldRender && (
         <>
           <Divider title="Next Up" />
           {nextSessions.map((session) => (
-            <ShortSessionEntry session={session} key={session.id} />
+            <ShortSessionEntry
+              session={session}
+              key={session.id + session.direct_link}
+            />
           ))}
         </>
       )}
