@@ -1,6 +1,6 @@
 import { addHours } from 'date-fns';
 import { RawSession, Session, SessionsData } from '../types/session';
-import { sortByDate } from './dateHelpers';
+import { isDST, sortByDate } from './dateHelpers';
 
 function mapSession(rawSession: RawSession): Session {
   const startTime = stringsToDateTime(rawSession.date, rawSession.start_time);
@@ -22,9 +22,12 @@ function mapSession(rawSession: RawSession): Session {
   };
 }
 
-/** Make these date + n_time strings actually useful, assume we're given UTC for once? */
+/** Make these date + n_time strings actually useful. */
 function stringsToDateTime(date?: string, time?: string) {
-  return date && time ? new Date(`${date}T${time}Z`) : undefined;
+  // Once again, we need to offset for P[SD]T 🙃. Why can nobody be bothered to just stick to UTC?
+  const swoogoOffset = isDST() ? '-07:00' : '-08:00';
+
+  return date && time ? new Date(`${date}T${time}${swoogoOffset}`) : undefined;
 }
 
 function getHasEnded(
@@ -79,37 +82,3 @@ export function normalizeSchedule(data?: SessionsData): Session[] {
 
   return data.map<Session>(mapSession);
 }
-
-// Save this since it'll be helpful later if it's anything like 2021 was
-// const apiDateTimeFormat = 'yyyy-MM-dd:HH:mm:ss xxxxx';
-
-// function normalizeSession(rawSession: RawSession): Session {
-//   if (rawSession.date && rawSession.startTime && rawSession.endTime) {
-//     // The swoogo/signalTV api both return dates in PDT/PST only.
-//     // Consider this when parsing, so that they'll format correctly across timezones
-//     const swoogoOffset = isDST() ? '-07:00' : '-08:00';
-//     const startDate = parse(
-//       `${rawSession.date}:${rawSession.startTime} ${swoogoOffset}`,
-//       apiDateTimeFormat,
-//       new Date()
-//     );
-//     const endDate = parse(
-//       `${rawSession.date}:${rawSession.endTime} ${swoogoOffset}`,
-//       apiDateTimeFormat,
-//       new Date()
-//     );
-
-//     return {
-//       ...rawSession,
-//       startDate,
-//       endDate,
-//     };
-//   }
-//   return null;
-// }
-
-// function normalizeSessions(rawSessions: RawSession[]): Session[] {
-//   return rawSessions
-//     .map((rawSession) => normalizeSession(rawSession))
-//     .filter((session) => session != null);
-// }
