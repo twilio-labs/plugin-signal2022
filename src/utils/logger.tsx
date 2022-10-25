@@ -4,9 +4,6 @@ import isWsl from 'is-wsl';
 import os from 'os';
 import path from 'path';
 import pino from 'pino';
-import { getRandomInt } from './maths';
-import { sleep } from './sleep';
-import chalk from 'chalk';
 
 export const loggerPath = path.join(os.tmpdir(), 'twilio-signal-dev-mode.log');
 
@@ -61,19 +58,5 @@ export const pinoFinalHandler = pino.final(
     if (!noExit) process.exit(err ? 1 : 0);
   }
 );
-
-export const addNewLine = () => process.stdout.write('\n');
-
-export const typeOut = async (
-  line: string,
-  replaceText: string,
-  color = 'magentaBright'
-) => {
-  for (const char of line.replace(replaceText, '')) {
-    process.stdout.write(chalk[color](char));
-    await sleep(getRandomInt(50, 10));
-  }
-  addNewLine();
-};
 
 export default logger;
