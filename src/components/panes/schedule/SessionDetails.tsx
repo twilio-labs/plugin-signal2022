@@ -9,11 +9,10 @@ export type SessionDetailsProps = {
 };
 
 export function SessionDetails({ session }: SessionDetailsProps) {
-  if (!session) {
-    return null;
-  }
+  if (!session) return null;
 
-  const showDescription = !!session.description;
+  const { description, name, speakers } = session;
+  const showDescription = Boolean(description);
 
   return (
     <Box
@@ -25,19 +24,19 @@ export function SessionDetails({ session }: SessionDetailsProps) {
     >
       <Box>
         <Box marginRight={2}>
-          <Bold wrap="truncate-end">{session.name} </Bold>
+          <Bold wrap="truncate-end">{name} </Bold>
         </Box>
         <Spacer />
       </Box>
       <Spacer />
-      {Array.isArray(session.speakers) && session.speakers.length > 0 && (
-        <Text wrap="truncate-end">{commaListsAnd`Speakers: ${session.speakers}`}</Text>
+      {Array.isArray(speakers) && speakers.length > 0 && (
+        <Text wrap="truncate-end">{commaListsAnd`Speakers: ${speakers}`}</Text>
       )}
       <Spacer />
       <Box>
         {showDescription && (
           <Text wrap="truncate-end">
-            {session.description.replace(/<\/?[^>]+>/g, '')}
+            {description.replace(/<\/?[^>]+>/g, '')}
           </Text>
         )}
       </Box>
