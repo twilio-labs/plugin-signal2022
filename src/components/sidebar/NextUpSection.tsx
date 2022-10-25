@@ -57,7 +57,7 @@ type ShortSessionEntryProps = {
 };
 
 function ShortSessionEntry({ session }: ShortSessionEntryProps) {
-  const startTime = formatDistanceToNow(new Date(session.start_time), {
+  const startTime = formatDistanceToNow(session.startTime, {
     addSuffix: true,
   });
 
