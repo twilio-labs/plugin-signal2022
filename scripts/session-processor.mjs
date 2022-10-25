@@ -21,7 +21,7 @@ async function generateSessionJSON() {
   }
 }
 
-async function getCirculationJson() {
+async function getSessionsJson() {
   const sessionsData = await generateSessionJSON();
 
   if (!sessionsData.length || sessionsData.length < 0) {
@@ -66,11 +66,6 @@ async function getCirculationJson() {
         type: match['Session Type'],
       };
     });
-  console.log(cleanSessions.length, cleanSessions[88]);
-  // console.log('initial length is', circulationData.length)
-  // console.log(circulationData[0])
-  // console.log(cleanCirculation[0])
-  // console.log('final length of array is', cleanCirculation.length)
 
   fs.writeFile(
     path.join(__dirname, `/clean/sessions.json`),
@@ -80,9 +75,8 @@ async function getCirculationJson() {
       if (err) {
         throw err;
       }
-      // console.log('Successfully joined data')
     }
   );
 }
 
-getCirculationJson();
+getSessionsJson();

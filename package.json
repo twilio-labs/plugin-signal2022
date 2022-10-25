@@ -41,7 +41,6 @@
     "ink-use-stdout-dimensions": "^1.0.5",
     "is-ci": "^2.0.0",
     "is-wsl": "^2.2.0",
-    "json-2-csv": "^3.17.2",
     "log-symbols": "^3.0.0",
     "mkdirp": "^1.0.4",
     "ms": "^2.1.2",
