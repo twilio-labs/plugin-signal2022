@@ -18,7 +18,7 @@ const RESOURCES = [
     key: 'tq',
     name: 'TwilioQuest',
     url: 'https://www.twilio.com/quest',
-    description: `Twilio's video game to teach you coding.`,
+    description: "Twilio's video game to teach you coding.",
   },
   {
     key: 'signal',
@@ -29,7 +29,7 @@ const RESOURCES = [
   {
     key: 'codeexchange',
     name: 'Twilio CodeExchange',
-    url: 'https://www.twilio.com/code-exchange?q=signal2022',
+    url: 'https://www.twilio.com/code-exchange',
     description: 'Find code for various use cases you can build with Twilio.',
   },
   {
