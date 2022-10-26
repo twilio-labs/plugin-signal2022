@@ -60,16 +60,16 @@ export function groupSessionsByTypeOrDate(
       session.date = `All Days`;
     }
 
-    if (!groupedSets[session.date]) {
-      groupedSets[session.date] = new Set();
+    if (!groupedSets[session.type]) {
+      groupedSets[session.type] = new Set();
     }
 
-    groupedSets[session.date].add(session);
+    groupedSets[session.type].add(session);
   }
 
   const grouped: GroupedSessions = {};
-  for (const date of Object.keys(groupedSets)) {
-    grouped[date] = [...groupedSets[date]].sort(sortByDate);
+  for (const type of Object.keys(groupedSets)) {
+    grouped[type] = [...groupedSets[type]].sort(sortByDate);
   }
 
   return grouped;
