@@ -9,17 +9,8 @@ const {
   loggerPath,
   cliLogLevelToPinoLogLevel,
   pinoFinalHandler,
-  typeOut,
-  addNewLine,
 } = require('../../utils/logger');
 const { computeDiagnostics } = require('../../utils/diagnostics');
-const readline = require('readline');
-const path = require('path');
-const chalk = require('chalk');
-const fs = require('fs');
-const { sleep } = require('../../utils/sleep');
-const { chalky } = require('../../utils/chalky');
-const { getRandomInt } = require('../../utils/maths');
 
 const { TwilioClientCommand } = baseCommands;
 
@@ -34,7 +25,7 @@ class Signal2022Command extends TwilioClientCommand {
 
   static aliases = ['signal'];
 
-  static examples = ['$ twilio signal', '$ twilio signal end credits --tail'];
+  static examples = ['$ twilio signal'];
 
   static flags = {
     ...baseFlags,
@@ -72,97 +63,6 @@ class Signal2022Command extends TwilioClientCommand {
     }
 
     return super.catch(error);
-  }
-
-  async checkForEndingCredits() {
-    const { argv, flags, logger } = this;
-
-    const end = argv[0] === 'end';
-    // Avoid edge case where user can fall into the normal flow by entering signal credits --tail
-    const credits = argv.includes('credits');
-
-    if (end || credits) {
-      if (end && credits && flags.tail) {
-        const creditsStream = readline.createInterface({
-          input: fs.createReadStream(
-            path.resolve(
-              __dirname,
-              '..',
-              '..',
-              '..',
-              'assets',
-              'end-credits.txt'
-            )
-          ),
-        });
-
-        let buffer = [];
-
-        const chalkyArtRegex = /^{([a-zA-Z]+)\s/;
-
-        for await (const line of creditsStream) {
-          if (line.startsWith('command')) {
-            await typeOut(line, 'command ');
-          } else if (line.startsWith('art')) {
-            buffer.push(line.replace('art ', ''));
-          } else if (line.startsWith('/art')) {
-            buffer.forEach((bufferedLine) => {
-              const customArtColors = chalkyArtRegex.test(bufferedLine);
-              console.log(
-                customArtColors
-                  ? chalky`${bufferedLine}` // this "works", but it gets really dicey and can crash the app depending on which characters are in the line 🙃
-                  : // @ts-ignore
-                    chalk.magentaBright(bufferedLine)
-              );
-            });
-            buffer = [];
-            await sleep(1500);
-          } else if (line.startsWith('dramaticPause')) {
-            const [_, duration] = line.split(' ');
-            await sleep(parseInt(duration) || 1000);
-          } else if (line.startsWith('yeetMeOuttaHere')) {
-            for (const command of ['^c', '^c']) {
-              // @ts-ignore
-              process.stdout.write(chalk.magentaBright(command));
-              await sleep(1000);
-            }
-            addNewLine();
-          } else if (line.startsWith('clear')) {
-            console.clear();
-          } else if (line.startsWith('vCenterText')) {
-            const { rows } = process.stdout;
-            const vPadding = Math.floor(rows / 2 - 1);
-            [...Array(vPadding)].forEach(addNewLine);
-            await typeOut(line, 'vCenterText ');
-          } else if (line.startsWith('totalCenter')) {
-            const newLine = line.replace('totalCenter ', '');
-            const { rows, columns } = process.stdout;
-            const vPadding = Math.floor(rows / 2 - 1);
-            [...Array(vPadding)].forEach(addNewLine);
-            // Seems sketchy, but works, at least for the logo
-            const hPadding = Math.floor((columns + newLine.length) / 2);
-            // @ts-ignore
-            console.log(chalk.yellowBright(newLine.padStart(hPadding)));
-          } else if (line.startsWith('hideCursor')) {
-            process.stdout.write('\x1B[?25l');
-          } else if (line.startsWith('showCursor')) {
-            process.stdout.write('\x1B[?25h');
-          } else {
-            await sleep(getRandomInt(350, 150));
-            console.log(chalky`${line}`);
-          }
-        }
-
-        return true;
-      }
-
-      logger.error(
-        'You must enter "twilio signal end credits --tail" exactly for this easter egg. Please try again!'
-      );
-      return true;
-    }
-
-    return false;
   }
 
   async checkFlags() {
@@ -224,11 +124,6 @@ class Signal2022Command extends TwilioClientCommand {
       msg: 'Diagnostics',
       twilioCliLogLevel: this.logger.config.level,
     });
-
-    const creditsAttempted = await this.checkForEndingCredits();
-    if (creditsAttempted) {
-      return;
-    }
 
     await this.checkFlags();
     await this.checkForMintty();

@@ -89,7 +89,6 @@ COMMANDS
 
 EXAMPLES
   $ twilio signal
-  $ twilio signal end credits --tail
   $ twilio signal:checkout -l
   $ twilio signal:checkout 6f7d66b 
 ```
