@@ -102,7 +102,8 @@ async function getSessionsJson() {
     .filter(sessionFilter)
     .map((session) => {
       session.type = generateSessionTabTypes(session);
-      session.start_time = session.type === "Superclass" ? null : session.start_time
+      session.start_time =
+        session.type === 'Superclass' ? null : session.start_time;
       session.name =
         session.name.indexOf('Booth') > -1
           ? cleanSessionName(session)
