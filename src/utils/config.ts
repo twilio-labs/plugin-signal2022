@@ -9,7 +9,7 @@ export const signalAuthPageUrl =
 
 export const developerModeApi =
   process.env?.SIGNAL_DEVELOPER_MODE_API ||
-  'https://signal-developer-mode-9311.twil.io';
+  'https://signal-dev-mode-2022-7815.twil.io';
 
 export const signalTvSchedule =
   process.env?.SIGNAL_TV_SCHEDULE ||

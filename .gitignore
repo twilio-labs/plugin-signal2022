@@ -8,6 +8,8 @@ node_modules
 coverage
 .env
 .twilio-functions
+sessions.csv
+.DS_Store
 
 # Logs
 logs

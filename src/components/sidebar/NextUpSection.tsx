@@ -2,7 +2,7 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import { Box, Text } from 'ink';
 import ms from 'ms';
 import React, { useEffect, useMemo, useState } from 'react';
-import { useCalendar } from '../../hooks/useCalendar';
+import { useSessions } from '../../hooks/useApi';
 import { useBreakpointForElement } from '../../hooks/useResize';
 import { Session } from '../../types/session';
 import { sortByDate } from '../../utils/dateHelpers';
@@ -11,9 +11,9 @@ import { Divider } from '../common/Divider';
 import { LoadingIndicator } from '../common/LoadingIndicator';
 
 function retrieveNextSessions(sessions: Session[], count: number) {
-  const currentTime = Date.now();
+  const currentTime = new Date();
   const futureSessions = sessions.filter((session) => {
-    return session.endDate.getTime() > currentTime;
+    return session.endTime > currentTime;
   });
   return futureSessions.slice(0, count);
 }
@@ -55,10 +55,12 @@ function useNextSessions(
 type ShortSessionEntryProps = {
   session: Session;
 };
+
 function ShortSessionEntry({ session }: ShortSessionEntryProps) {
-  const startTime = formatDistanceToNow(session.startDate, {
+  const startTime = formatDistanceToNow(session.startTime, {
     addSuffix: true,
   });
+
   return (
     <>
       <Text wrap="truncate-end">
@@ -72,16 +74,21 @@ function ShortSessionEntry({ session }: ShortSessionEntryProps) {
 export type NextUpProps = {
   sessions: Session[];
 };
+
 export function NextUp({ sessions }: NextUpProps) {
   const { ref, shouldRender } = useBreakpointForElement({ minHeight: 7 });
   const nextSessions = useNextSessions(sessions);
+
   return (
     <Box ref={ref} flexDirection="column" padding={1} height={7}>
       {shouldRender && (
         <>
           <Divider title="Next Up" />
           {nextSessions.map((session) => (
-            <ShortSessionEntry session={session} key={session.id} />
+            <ShortSessionEntry
+              session={session}
+              key={session.id + session.direct_link}
+            />
           ))}
         </>
       )}
@@ -90,10 +97,10 @@ export function NextUp({ sessions }: NextUpProps) {
 }
 
 export const NextUpSection = () => {
-  const { loading, error, calendar } = useCalendar();
+  const { loading, error, sessionsList } = useSessions();
 
-  if (Array.isArray(calendar)) {
-    return <NextUp sessions={calendar} />;
+  if (Array.isArray(sessionsList)) {
+    return <NextUp sessions={sessionsList} />;
   } else if (typeof error !== 'undefined') {
     return <Text>{error.toString()}</Text>;
   } else if (typeof loading !== 'undefined') {

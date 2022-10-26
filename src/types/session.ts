@@ -1,29 +1,40 @@
-export type SessionSpeaker = {
-  firstName: string;
-  lastName: string;
-};
-
 export interface RawSession {
-  id: string;
-  date: string;
-  startTime: number;
-  endTime: number;
+  id: number | string;
   name: string;
-  description: string | null;
-  speakers: SessionSpeaker[] | null;
-  ticketType: string[] | null;
-  level: string[] | null;
-  url?: string;
-  signalTv?: boolean;
+  description?: string;
+  end_time?: string;
+  visibility: Visibility;
+  speakers: string[] | string;
+  direct_link: string;
+  type?: Type;
+  date?: string;
+  start_time?: string;
 }
+
+export enum Type {
+  Analyst = 'Analyst',
+  Breakout = 'Breakout',
+  Generic = 'Generic',
+  IndustryQABooth = 'Industry Q&A  Booth',
+  Keynote = 'Keynote',
+  ProductQABooth = 'Product Q&A  Booth',
+  SignalTv = 'SIGNAL TV',
+  Spotlight = 'Spotlight',
+  SpotlightForWebsite = 'Spotlight (for website)',
+  Superclass = 'Superclass',
+  TheSummits = 'The Summits',
+  VenturesQABooth = 'Ventures Q&A  Booth',
+}
+
+export enum Visibility {
+  Everyone = 'Everyone',
+}
+
+export type SessionsData = RawSession[];
 
 export interface Session extends RawSession {
-  startDate: Date;
-  endDate: Date;
-}
-
-export interface AugmentedSession extends Session {
-  isSignalTv: boolean;
-  canRegister: boolean;
+  endTime?: Date;
   hasEnded: boolean;
+  speakers: string | string[];
+  startTime?: Date;
 }

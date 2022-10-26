@@ -1,25 +1,26 @@
 import format from 'date-fns/format';
 import { Text } from 'ink';
 import React from 'react';
-import { AugmentedSession } from '../../../types/session';
+import { Session } from '../../../types/session';
 
 export type SessionTimeProps = {
-  session: AugmentedSession;
+  session: Session;
 };
-export function SessionTime({ session }: SessionTimeProps) {
-  const startTime = format(session.startDate, 'hh:mm');
-  const endTime = format(session.endDate, 'hh:mm');
 
-  if (!session.hasEnded) {
+export function SessionTime({ session }: SessionTimeProps) {
+  const startTime = maybeFormatTime(session.startTime);
+  const endTime = maybeFormatTime(session.endTime);
+
+  if (!session.hasEnded && startTime) {
     return (
       <>
-        {startTime} <Text dimColor>- {endTime} </Text>
+        {startTime} <Text dimColor>- {endTime ?? '-----'} </Text>
         {' │ '}
       </>
     );
   }
 
-  const label = session.isSignalTv ? ' off air ' : 'on demand';
+  const label = 'on demand';
 
   return (
     <>
@@ -27,4 +28,8 @@ export function SessionTime({ session }: SessionTimeProps) {
       {' │ '}
     </>
   );
+}
+
+function maybeFormatTime(time?: Date) {
+  return time ? format(time, 'hh:mm') : undefined;
 }
