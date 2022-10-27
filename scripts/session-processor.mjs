@@ -69,7 +69,7 @@ async function getSessionsJson() {
     } else if (sessionType === 'Superclass') {
       return sessionType;
     } else if (sessionType && sessionType.indexOf('Booth') > -1) {
-      return sessionType.replace("  Booth", "");
+      return sessionType;
     } else {
       return session.date;
     }
@@ -95,6 +95,7 @@ async function getSessionsJson() {
         speakers: session.Speakers
           ? session.Speakers.split('\n').filter((speaker) => speaker)
           : '',
+        region: session['Region (Actual)'],
         direct_link: session['Direct Link'],
         type: session['Session Type'],
       };

@@ -3,6 +3,7 @@ import React from 'react';
 import { Session } from '../../../types/session';
 import { ListSelector } from '../../common/ListSelector';
 import { SessionTime } from './SessionTime';
+import { SessionTags } from './tags/SessionTags';
 
 export type SessionEntryProps = {
   session: Session;
@@ -23,6 +24,9 @@ export function SessionEntry({ session, active }: SessionEntryProps) {
           <Text wrap="truncate-end" dimColor={session.hasEnded}>
             {session.name}
           </Text>
+        </Box>
+        <Box marginLeft={2} flexShrink={0}>
+          <SessionTags session={session} />
         </Box>
       </Box>
     </Box>
