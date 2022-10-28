@@ -86,7 +86,10 @@ async function getSessionsJson() {
         id: session['Session ID'] ? session['Session ID'] : index,
         name: session['Session Name'],
         description: session.Description,
-        start_time: session['Start Time'],
+        start_time:
+          session['Record Type'] === 'On-demand'
+            ? undefined
+            : session['Start Time'],
         end_time: session['Start & End Time']
           ? session['Start & End Time'].split(' - ')[1]
           : '',

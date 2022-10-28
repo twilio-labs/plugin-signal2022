@@ -32,7 +32,6 @@ export function SessionTags({ session }: SessionTags) {
 
   return (
     <Text>
-      {signalTv && <SignalTvTag />}
       {apac && <ApacTag />}
       {generateBoothType(session.type)}
     </Text>
