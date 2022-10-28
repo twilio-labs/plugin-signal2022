@@ -118,7 +118,7 @@
     "dev": "tsc --watch",
     "postpack": "rm -f oclif.manifest.json",
     "lint": "eslint --ignore-path .gitignore .",
-    "prepack": "npm run build && npm oclif manifest && npx oclif readme",
+    "prepack": "npm run build && npx oclif manifest && npx oclif readme",
     "pretest": "tsc --noEmit",
     "test": "jest",
     "posttest": "npm run lint && npm audit",

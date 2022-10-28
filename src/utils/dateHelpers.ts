@@ -2,7 +2,7 @@ import ms from 'ms';
 import { Session } from '../types/session';
 
 export function sortByDate(a: Session, b: Session): number {
-  if (!a.startTime || !b.startTime || !a.endTime || !b.endTime) return 0;
+  if (!a.startTime || !b.startTime) return 0;
 
   const timeSorted = a.startTime.getTime() - b.startTime.getTime();
 

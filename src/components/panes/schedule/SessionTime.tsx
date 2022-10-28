@@ -31,5 +31,5 @@ export function SessionTime({ session }: SessionTimeProps) {
 }
 
 function maybeFormatTime(time?: Date) {
-  return time ? format(time, 'hh:mm') : undefined;
+  return time ? format(time, 'HH:mm') : undefined;
 }

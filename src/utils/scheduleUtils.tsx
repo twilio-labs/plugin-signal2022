@@ -60,11 +60,19 @@ export function groupSessionsByTypeOrDate(
       session.date = `All Days`;
     }
 
-    if (!groupedSets[session.type]) {
+    if (isBoothSession(session) && !groupedSets['Booths']) {
+      groupedSets['Booths'] = new Set();
+    }
+
+    if (!groupedSets[session.type] && !isBoothSession(session)) {
       groupedSets[session.type] = new Set();
     }
 
-    groupedSets[session.type].add(session);
+    if (isBoothSession(session)) {
+      groupedSets['Booths'].add(session);
+    } else {
+      groupedSets[session.type].add(session);
+    }
   }
 
   const grouped: GroupedSessions = {};
@@ -81,4 +89,8 @@ export function normalizeSchedule(data?: SessionsData): Session[] {
   }
 
   return data.map<Session>(mapSession);
+}
+
+export function isBoothSession(session) {
+  return session.type.indexOf('Booth') > -1;
 }

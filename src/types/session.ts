@@ -7,6 +7,7 @@ export interface RawSession {
   speakers: string[] | string;
   direct_link: string;
   type?: Type;
+  region?: string;
   date?: string;
   start_time?: string;
 }
