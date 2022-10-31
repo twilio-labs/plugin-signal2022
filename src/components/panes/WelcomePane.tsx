@@ -24,10 +24,9 @@ function FullDescription() {
       </Text>
       <Newline count={2} />
       <Text>
-        Developer Mode is more than just a gimmick. We acknowledge that this
-        year's SIGNAL is different. We are not gathering in person but instead
-        are gathering virtually from around the world. We are united by one
-        objective:
+        Developer Mode is another way to access information about SIGNAL from
+        the comfort of your CLI. As you navigate Developer Mode, know that we
+        are united by one objective:
       </Text>
       <Newline count={2} />
       <TypeText
@@ -41,13 +40,16 @@ function FullDescription() {
       <Newline />
       <UnorderedList>
         <ListItem>
-          The full SIGNAL schedule. Including SIGNAL TV programming.
+          The full SIGNAL schedule, including SIGNAL TV and Superclass
+          programming.
         </ListItem>
         <ListItem>
-          A packed section of demo applications and code samples that you can
-          install within minutes.
+          Demo applications and code samples that you can install within
+          minutes.
         </ListItem>
-        <ListItem>And more</ListItem>
+        <ListItem>
+          A list of helpful resources for your SIGNAL 2022 experience.
+        </ListItem>
       </UnorderedList>
       <Newline count={2} />
       <Text>
@@ -71,7 +73,7 @@ function MediumDescription() {
     <ScrollText>
       <Newline count={1} />
       <Text>
-        Instead of gathering for SIGNAL in person we are gathering virtually.
+        Once again, we are gathering virtually for Twilio's SIGNAL Conference.
         But we are still united by a shared objective:
       </Text>
       <Newline count={2} />
@@ -84,11 +86,11 @@ function MediumDescription() {
       <Text>We equipped Developer Mode with a variety of functionality:</Text>
       <Newline />
       <UnorderedList>
-        <ListItem>The full SIGNAL schedule incl. SIGNAL TV</ListItem>
+        <ListItem>The full SIGNAL schedule, incl. SIGNAL TV</ListItem>
+        <ListItem>Demo apps with automatic download functionality.</ListItem>
         <ListItem>
-          A packed demo apps section with automatic download functionality.
+          A list of helpful resources for your SIGNAL 2022 experience.
         </ListItem>
-        <ListItem>And more</ListItem>
       </UnorderedList>
       <Newline count={1} />
       <Text>
@@ -114,8 +116,8 @@ function ShortDescription() {
       <Text>
         SIGNAL Developer Mode is an augmentation to your SIGNAL experience,
         packed with functionality for you to build while you are attending
-        SIGNAL. Incl. a full schedule, useful resources, a packed demo section
-        and more.
+        SIGNAL. It includes a full schedule, useful resources, and several demos
+        of Twilio code.
       </Text>
       <Newline count={2} />
       <Text>

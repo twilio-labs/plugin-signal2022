@@ -8,6 +8,7 @@ import { useResponsiveWindowSize } from '../../hooks/useResize';
 import { Bold } from '../common/Bold';
 import { Avatar } from '../graphics/Avatar';
 import { MissingAvatar } from '../graphics/MissingAvatar';
+import { TwilioLogo } from '../graphics/TwilioLogo';
 import { Controls } from './Controls';
 import { NextUpSection } from './NextUpSection';
 
@@ -50,13 +51,7 @@ export function Sidebar() {
           </Bold>
         )}
       </Box>
-      {heroImage ? (
-        <Avatar imageBuffer={heroImage} />
-      ) : heroImage === null ? (
-        <MissingAvatar />
-      ) : (
-        <Box height={17} />
-      )}
+      <TwilioLogo />
       <NextUpSection />
       <Controls />
     </Box>
