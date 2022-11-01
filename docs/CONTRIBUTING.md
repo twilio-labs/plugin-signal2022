@@ -28,18 +28,6 @@ You can automatically re-build the plugin upon source code changes by running th
 npm run dev
 ```
 
-## Use an alternate API endpoint for testing
-
-For development purposes, you may wish to point the plugin at an alternate Signal API URL, by setting the `SIGNAL_API_URL` variable in the `.env` file.
-
-## Skip authentication flow during testing
-
-During testing you'll likely want to skip the interactive authentication prompts. You can provide a set of hardcoded credentials in the `.env` file and load them by using this demo script to run the app:
-
-```
-npm run demo
-```
-
 ## Debug logging
 
 Since the UI takes the entire screen it hides errors and `console.*` statements. If you need to see them run:

@@ -25,7 +25,7 @@ It's built on top of the [Twilio CLI](https://twil.io/cli) and provides function
 
 You'll need the [Twilio CLI](https://twil.io/cli) to run SIGNAL Developer Mode. Head over to the [Twilio CLI documentation](https://www.twilio.com/docs/twilio-cli/quickstart) to install it.
 
-Additionally, to view the sessions shown in Developer Mode, you'll need a ticket to SIGNAL 2022. Register for a free ticket on [the SIGNAL website](https://signal.twilio.com).
+While you can see info about sessions in Developer Mode, in order to view the session content, you'll need a free ticket to SIGNAL 2022. Register today on [the SIGNAL website](https://signal.twilio.com).
 
 ## Supported Terminals
 
@@ -49,7 +49,7 @@ USAGE
 
 ## Usage
 
-SIGNAL Developer Mode relies on your keyboard for navigation. Check out the [announcement blog post](https://twil.io/signal-developer-mode) for a detaild walkthrough but here are some common controls:
+SIGNAL Developer Mode relies on your keyboard for navigation. Check out [last years' announcement blog post](https://twil.io/signal-developer-mode) for a ed walkthrough but here are some common controls:
 * <kbd>Ctrl</kbd>+<kbd>C</kbd> will always exit the application
 * <kbd>Ctrl</kbd>+<kbd>B</kbd> will toggle the sidebar
 * <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> can scroll through lists
@@ -77,8 +77,6 @@ OPTIONS
   -o=(columns|json|tsv)            [default: columns] Format of command output.
 
   -p, --profile=profile            Shorthand identifier for your profile.
-
-  --email=email                    The email you use to log into signal.twilio.com/login
 
   --feedback                       Learn how you can give feedback on SIGNAL Developer Mode.
 
