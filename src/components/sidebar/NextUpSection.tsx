@@ -77,7 +77,8 @@ export type NextUpProps = {
 
 export function NextUp({ sessions }: NextUpProps) {
   const { ref, shouldRender } = useBreakpointForElement({ minHeight: 7 });
-  const nextSessions = useNextSessions(sessions);
+  const cleanSessions = sessions.filter((session) => !!session.startTime);
+  const nextSessions = useNextSessions(cleanSessions);
 
   return (
     <Box ref={ref} flexDirection="column" padding={1} height={7}>
