@@ -171,12 +171,6 @@ export function WelcomePane() {
     [showMessage]
   );
 
-  const greetingMessage = useMemo(
-    () =>
-      `Welcome, ${name}. You entered the world of SIGNAL's Developer Mode. `,
-    [name]
-  );
-
   return (
     <Pane headline="Ahoy">
       <Box
@@ -189,7 +183,7 @@ export function WelcomePane() {
       >
         <Bold>
           <TypeText
-            text={greetingMessage}
+            text={`Welcome, Operator. You entered the world of SIGNAL's Developer Mode.`}
             onDone={makeFullMessageVisible}
             showCursor
           />

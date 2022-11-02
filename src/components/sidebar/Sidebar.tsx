@@ -3,18 +3,14 @@ import { Box, Text } from 'ink';
 import ms from 'ms';
 import React, { useEffect, useState } from 'react';
 import { useMode } from '../../context/mode';
-import { useUser } from '../../context/user';
 import { useResponsiveWindowSize } from '../../hooks/useResize';
 import { Bold } from '../common/Bold';
-import { Avatar } from '../graphics/Avatar';
-import { MissingAvatar } from '../graphics/MissingAvatar';
 import { TwilioLogo } from '../graphics/TwilioLogo';
 import { Controls } from './Controls';
 import { NextUpSection } from './NextUpSection';
 
 export function Sidebar() {
   const { width: totalWidth, height: totalHeight } = useResponsiveWindowSize();
-  const { name, heroImage } = useUser();
   const { state } = useMode();
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -43,7 +39,7 @@ export function Sidebar() {
         minHeight={5}
         flexShrink={0}
       >
-        <Bold>Welcome to SIGNAL 2022, {name}!</Bold>
+        <Bold>Welcome to SIGNAL 2022, Operator!</Bold>
         <Text>Current Time: {format(currentTime, 'HH:mm')}</Text>
         {process.env.DEBUG_SIGNAL && (
           <Bold>
