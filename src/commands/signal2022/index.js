@@ -127,7 +127,7 @@ class Signal2022Command extends TwilioClientCommand {
     shouldCleanScreen = !debug;
     await render(
       {
-        name: '',
+        name: 'Operator',
         accountSid: this.twilioClient.accountSid,
         twilioUsername: this.twilioClient.username,
         twilioPassword: this.twilioClient.password,
