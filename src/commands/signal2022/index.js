@@ -129,10 +129,8 @@ class Signal2022Command extends TwilioClientCommand {
     await this.checkForMintty();
     this.checkForGit();
     shouldCleanScreen = !debug;
-    // TODO: Create some local state to capture the person's name?
     await render(
       {
-        name: 'Ricky',
         accountSid: this.twilioClient.accountSid,
         twilioUsername: this.twilioClient.username,
         twilioPassword: this.twilioClient.password,
