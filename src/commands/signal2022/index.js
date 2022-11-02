@@ -23,10 +23,6 @@ baseFlags.profile.description =
 class Signal2022Command extends TwilioClientCommand {
   static strict = false;
 
-  static aliases = ['signal'];
-
-  static examples = ['$ twilio signal'];
-
   static flags = {
     ...baseFlags,
     diagnostics: Flags.boolean({
@@ -131,7 +127,7 @@ class Signal2022Command extends TwilioClientCommand {
     shouldCleanScreen = !debug;
     await render(
       {
-        name: 'Operator',
+        name: '',
         accountSid: this.twilioClient.accountSid,
         twilioUsername: this.twilioClient.username,
         twilioPassword: this.twilioClient.password,
