@@ -54,7 +54,7 @@ const RESOURCES = [
   {
     key: 'dev-mode-introduction',
     name: 'SIGNAL Developer Mode',
-    url: 'https://www.twilio.com/blog/signal-developer-mode-2022',
+    url: 'https://www.twilio.com/blog/signal-developer-mode-2021',
     description: 'Read more on how to use SIGNAL Developer Mode',
   },
   {
